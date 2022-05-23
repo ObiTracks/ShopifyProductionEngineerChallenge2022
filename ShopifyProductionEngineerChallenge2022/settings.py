@@ -29,9 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1', 
     '0.0.0.0', 
-    '6905385c-248c-4c2f-8c4a-c28ad949278e.id.repl.co',
-    'https://6905385c-248c-4c2f-8c4a-c28ad949278e.id.repl.co',
-    'shopify-challenge-2022-obi.herokuapp.com'
+    'shopify-prod-challenge-2022.herokuapp.com',
 ]
 
 #Replit Configuration
