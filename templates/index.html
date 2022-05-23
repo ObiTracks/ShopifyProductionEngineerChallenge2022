@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <title>Logistics Company</title>
+</head>
+<body>
+    <h1>Logistics Company</h1>
+    <div class="content">
+        <div class="container left" id="left-container">
+            <h2>Inventory</h2>
+            <table>
+                <tr class="thead">
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Per Value</th>
+                    <th>Shipment</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+                {% for inventory in inventories %}
+                    <tr>
+                        <td>{{inventory.name}}</td>
+                        <td>{{inventory.quantity}}</td>
+                        <td>${{inventory.per_value}}</td>
+                        <td>{{inventory.shipment}}</td>
+                        <td>
+                            <a href="{% url 'load-instance' 'inventory' inventory.id %}">Edit</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete-object' 'inventory' inventory.id %}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                
+            </table>
+
+            <h2>Shipments</h2>
+            <table>
+                <tr class="thead">
+                    <th>Recipient</th>
+                    <th>Total Inventory</th>
+                    <th>Unique Inventory</th>
+                    <th>Total Value</th>
+                    <th>Destination</th>
+                    <th>Shipment Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+                {% for shipment in shipments %}
+                <tr class="inventory">
+                    <td>{{shipment.recipient}}</td>
+                    <td>{{shipment.total_inventory_count}}</td>
+                    <td>{{shipment.unique_inventory_count}}
+                    </td>
+                    <td>${{shipment.total_value}}</td>
+                    <td>{{shipment.destination}}</td>
+                    <td>{{shipment.shipment_date}}</td>
+                    <td>
+                        <a href="{% url 'load-instance' 'shipment' shipment.id %}">Edit</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete-object' 'shipment' shipment.id %}">Delete</a>
+                        <div class="modal">
+                            <h3>Inventory</h3>
+                            {% for inventory in shipment.inventory_set.all %}
+                                <p>{{inventory}}</p>
+                            {% endfor %}
+                        </div>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+                
+            </table>
+
+
+        </div>
+        <div class="container right"  id="left-container">
+            <h2>+ Inventory</h2>
+            <form method="POST" id="inventory-form">
+                {% csrf_token %}
+                {{inventory_form.as_ul}}
+                
+            <input type="hidden" name="form_id" value="inventory-form">
+                <button>submit</button>
+                <a href="{% url 'dashboard' %}"><button>clear form</button></a>
+
+                {% comment %} {% include 'button.html' with text="Submit" type="submit"%}
+                {% include 'button.html' with text="Reset" type="reset" %} {% endcomment %}
+            </form>
+
+            <h2>+ Shipment</h2>
+            <form method="POST" id="shipment-form">
+                {% csrf_token %}
+                {{shipment_form.as_ul}}
+
+                <input type="hidden" name="form_id" value="shipment-form">
+                <small><i>Use CTRL + click to select multiple inventories</i></small>
+                <br>
+                <button>submit</button>
+                <button formaction="{% url 'dashboard' %}">clear form</button>
+            </form>
+            
+        </div>
+    </div>
+
+</body>
+</html>

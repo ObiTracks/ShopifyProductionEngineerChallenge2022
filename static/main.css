@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+* {
+    font-family: 'Inter', sans-serif;
+}
+body{
+    padding: 3%;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    padding-right: 40px;
+}
+
+.container.left {
+    flex: 4;
+}
+.container.right {
+    flex: 2;
+}
+
+form, table{
+    margin: 0 0 40px 0;
+    border-collapse: collapse;
+}
+
+form{
+    width: fit-content;
+}
+
+tr{
+    background-color: #D9D9D9;
+}
+.thead{
+    background-color: none;
+    background: none;
+}
+
+th{
+    text-align: left;
+    padding: 5px 10px;
+}
+
+td{
+    position: relative;
+    height: 100%;
+    padding: 8px 10px;   
+}
+
+.inventory{
+    position: relative;
+}
+.modal{
+    /* display: none; */
+    position: absolute;
+    top: 0;
+    right: calc(-150px - 10px);
+    width: 130px;
+    height: fit-content;
+    padding: 0 10px;
+
+    font-size: 13px;
+    background: rgba(216, 216, 216, 0.429);
+    border-radius: 5px;
+    z-index: 1;
+    opacity: 0%;
+    transition: opacity 0.2s linear;
+    transform: none;
+
+}
+
+.inventory:hover .modal{
+    opacity: 100%;
+    transition: opacity 0.3s ease 0.3s;
+    /* transition: opacity 0.1s ease 0.3s; */
+    /* transition: none; */
+    /* display: block; */
+}
+
+li{
+  list-style-type: none;
+  padding: 0 0 8px 0;
+}
