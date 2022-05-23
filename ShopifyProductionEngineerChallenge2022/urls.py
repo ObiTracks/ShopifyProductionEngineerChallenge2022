@@ -20,12 +20,14 @@ from app import views
 urlpatterns = [
     path('admin', admin.site.urls),
     path('', views.dashboard, name="dashboard"),
-    path('<str:pk_type>/<str:pk>', views.dashboard, name="load-instance"),
+    path('/<str:pk>', views.dashboard, name="load-instance"),
 
     # FORM HANDLER ENDPOINTS
     path('save/<str:pk>', views.saveInventory, name="save-inventory"),
-    path('save/<str:shipment_pk>', views.saveShipment, name="save-shipment"),
-    path('delete/<str:pk_type>/<str:pk>', views.deleteObject, name="delete-object"),
+    path('delete/<str:pk>', views.deleteInventory, name="delete-inventory"),
+
+    #EXPORT HANDLER ENDPOINTS
+    path('export/', views.export_all_inventories, name="export-inventories"),
 
     
 ]

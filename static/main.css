@@ -6,6 +6,12 @@ body{
     padding: 3%;
 }
 
+h1{
+    color: black;
+}
+a{
+    text-decoration: none;
+}
 .content{
     display: flex;
     flex-direction: row;
